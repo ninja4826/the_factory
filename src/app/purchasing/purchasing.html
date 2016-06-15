@@ -1,0 +1,73 @@
+<!--<div class="card">-->
+<!--  <div class="card-block">-->
+    <!-- Do +/- -->
+<!--    <h4 class="card-title">Card Title</h4>-->
+<!--  </div>-->
+  <!-- img -->
+<!--  <img src="http://placehold.it/318x180" alt="Placeholder">-->
+<!--  <div class="card-block">-->
+    <!-- other stuff -->
+<!--    <p class="card-text">Card text</p>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="row" *ngFor="let cardRow of cardRows">-->
+<!--  <div class="col-sm-6" *ngFor="let card of cardRow">-->
+<!--    <div class="card center-block" style="max-width: 318px;">-->
+<!--      <div class="card-block">-->
+<!--        <h4 class="card-title">{{ card.name }}</h4>-->
+<!--      </div>-->
+<!--      <img src="http://placehold.it/318x180" alt="Placeholder">-->
+<!--      <div class="card-block">-->
+<!--        <p class="card-text">{{ card.sellPrice | currency:'USD':true }}</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<button type="button" (click)="completePurchase()" class="btn btn-primary purchase-btn">BUY/SELL ITEMS</button>
+
+<div class="row">
+  <div class="col-md-6 col-lg-4" *ngFor="let card of cards">
+    <div class="card card-inverse center-block">
+      <!--<div class="card-block">-->
+      <!--  <h4 class="card-title">{{ card.name | formatter }}</h4>-->
+        <!--<button type="button" class="btn btn-success" style="border:0;">-->
+        <!--  <i class="fa fa-plus" aria-hidden="true" style="color: white;"></i>-->
+        <!--</button>-->
+      <!--</div>-->
+      <div class="card-header">
+        <button type="button" (click)="changeQuantity(card.name, false)" class="btn btn-danger pull-left">
+          <i class="fa fa-minus" aria-hidden="true"></i>
+        </button>
+        <!--<div class="center-block">{{ order[card.name] }}</div>-->
+        <button type="button" (click)="changeQuantity(card.name)" class="btn btn-success pull-right">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+      <img src="http://placehold.it/318x180" alt="Placeholder">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-xs-center">{{ card.name | formatter }}</li>
+        <li class="list-group-item text-xs-center">
+          <span *ngIf="isPos(order[card.name])">+</span>{{ order[card.name] }}
+          &bull;
+          <span [class.buy-price]="isPos(order[card.name])"
+            [class.sell-price]="!isPos(order[card.name])">{{ order[card.name] * card.buyPrice | currency:'USD':true }}</span>
+          <!--<span [class.buy-price]="isPos(order[card.name])"-->
+          <!--  [class.sell-price]="!isPos(order[card.name])">{{ order[card.name] * card.buyPrice }}</span>-->
+        </li>
+        <li class="list-group-item text-xs-center">
+          <span class="buy-price">{{ card.buyPrice | currency:'USD':true }}</span>
+          &bull;
+          <span class="sell-price">{{ card.sellPrice | currency:'USD':true }}</span>
+        </li>
+      </ul>
+      <!--<div class="card-block">-->
+      <!--  <p class="card-text text-xs-right">{{ card.name | formatter }}</p>-->
+      <!--  <p class="card-text text-xs-right">-->
+      <!--    <span class="buy-price">{{ card.buyPrice | currency:'USD':true }}</span>-->
+      <!--    &bull;-->
+      <!--    <span class="sell-price">{{ card.sellPrice | currency:'USD':true }}</span>-->
+      <!--  </p>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>

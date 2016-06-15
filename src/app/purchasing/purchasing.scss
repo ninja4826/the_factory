@@ -1,0 +1,38 @@
+.card.center-block {
+  max-width: 318px;
+  
+  &.card-inverse {
+    background-color: #595959;
+    border-color: #595959;
+  }
+  
+  & .card-header {
+    padding: 0px;
+    & button.btn {
+      border-radius: 0;
+      & i.fa {
+        color: white;
+      }
+    }
+  }
+}
+
+.buy-price {
+  color: red;
+}
+.sell-price {
+  color: #00B300;
+}
+
+.btn.purchase-btn {
+  position: fixed;
+  top: 54px;
+  right: 0px;
+  width: 100%;
+  z-index: 1029;
+  border-radius: 0;
+}
+
+.row.root-row {
+  padding-top: 40px;
+}
