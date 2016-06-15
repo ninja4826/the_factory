@@ -1080,12 +1080,13 @@ webpackJsonp([2],{
 	var core_1 = __webpack_require__(1);
 	var game_1 = __webpack_require__(198);
 	var app_service_1 = __webpack_require__(127);
-	// import { items } from '../game';
 	var PurchasingComponent = (function () {
 	    function PurchasingComponent(gameService) {
 	        this.cards = [];
 	        this.order = {};
 	        this.orderPrice = 0;
+	        this.inventory = {};
+	        this.headerMargins = '';
 	        // constructor() {
 	        this.gameService = gameService;
 	        // this.cards = MATERIALS;
@@ -1098,17 +1099,23 @@ webpackJsonp([2],{
 	            this.cards.push(this.cardObj[name]);
 	            this.order[name] = 0;
 	        }
-	        console.log(game_1.MATERIALS);
+	        // console.log(MATERIALS);
+	        this.inventory = this.gameService.inventory;
 	    }
 	    PurchasingComponent.prototype.changeQuantity = function (name, pos) {
 	        if (pos === void 0) { pos = true; }
+	        console.log(this.order[name]);
+	        console.log(this.gameService.inventory[name]);
 	        if (pos) {
 	            if ((this.orderPrice + this.cardObj[name].buyPrice) > this.gameService.money) {
 	                return;
 	            }
 	        }
 	        else {
-	            if (this.gameService.inventory[name] === 0) {
+	            // if (this.gameService.inventory[name] === 0) {
+	            //   return;
+	            // }
+	            if (this.order[name] <= (this.gameService.inventory[name]) * -1) {
 	                return;
 	            }
 	        }
@@ -1285,7 +1292,7 @@ webpackJsonp([2],{
 /***/ 475:
 /***/ function(module, exports) {
 
-	module.exports = ".card.center-block {\n  max-width: 318px; }\n  .card.center-block.card-inverse {\n    background-color: #595959;\n    border-color: #595959; }\n  .card.center-block .card-header {\n    padding: 0px; }\n    .card.center-block .card-header button.btn {\n      border-radius: 0; }\n      .card.center-block .card-header button.btn i.fa {\n        color: white; }\n\n.buy-price {\n  color: red; }\n\n.sell-price {\n  color: #00B300; }\n\n.btn.purchase-btn {\n  position: fixed;\n  top: 54px;\n  right: 0px;\n  width: 100%;\n  z-index: 1029;\n  border-radius: 0; }\n\n.row.root-row {\n  padding-top: 40px; }\n"
+	module.exports = ".card.center-block {\n  max-width: 318px; }\n  .card.center-block.card-inverse {\n    background-color: #595959;\n    border-color: #595959; }\n  .card.center-block .card-header {\n    padding: 0px;\n    background-color: #595959;\n    height: 38px; }\n    .card.center-block .card-header button.btn {\n      border-radius: 0; }\n      .card.center-block .card-header button.btn i.fa {\n        color: white; }\n\n.buy-price {\n  color: red; }\n\n.sell-price {\n  color: #00B300; }\n\n.btn.purchase-btn {\n  position: fixed;\n  top: 54px;\n  right: 0px;\n  width: 100%;\n  z-index: 1029;\n  border-radius: 0; }\n\n.row.root-row {\n  padding-top: 40px; }\n\n.inv-status {\n  width: 222.8437px;\n  display: inline-block;\n  background-color: #595959;\n  color: white;\n  text-align: center;\n  margin: 7px 0px 7px 0px; }\n"
 
 /***/ },
 
@@ -1327,7 +1334,7 @@ webpackJsonp([2],{
 /***/ 481:
 /***/ function(module, exports) {
 
-	module.exports = "<!--<div class=\"card\">-->\n<!--  <div class=\"card-block\">-->\n    <!-- Do +/- -->\n<!--    <h4 class=\"card-title\">Card Title</h4>-->\n<!--  </div>-->\n  <!-- img -->\n<!--  <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">-->\n<!--  <div class=\"card-block\">-->\n    <!-- other stuff -->\n<!--    <p class=\"card-text\">Card text</p>-->\n<!--  </div>-->\n<!--</div>-->\n<!--<div class=\"row\" *ngFor=\"let cardRow of cardRows\">-->\n<!--  <div class=\"col-sm-6\" *ngFor=\"let card of cardRow\">-->\n<!--    <div class=\"card center-block\" style=\"max-width: 318px;\">-->\n<!--      <div class=\"card-block\">-->\n<!--        <h4 class=\"card-title\">{{ card.name }}</h4>-->\n<!--      </div>-->\n<!--      <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">-->\n<!--      <div class=\"card-block\">-->\n<!--        <p class=\"card-text\">{{ card.sellPrice | currency:'USD':true }}</p>-->\n<!--      </div>-->\n<!--    </div>-->\n<!--  </div>-->\n<!--</div>-->\n<button type=\"button\" (click)=\"completePurchase()\" class=\"btn btn-primary purchase-btn\">BUY/SELL ITEMS</button>\n\n<div class=\"row\">\n  <div class=\"col-md-6 col-lg-4\" *ngFor=\"let card of cards\">\n    <div class=\"card card-inverse center-block\">\n      <!--<div class=\"card-block\">-->\n      <!--  <h4 class=\"card-title\">{{ card.name | formatter }}</h4>-->\n        <!--<button type=\"button\" class=\"btn btn-success\" style=\"border:0;\">-->\n        <!--  <i class=\"fa fa-plus\" aria-hidden=\"true\" style=\"color: white;\"></i>-->\n        <!--</button>-->\n      <!--</div>-->\n      <div class=\"card-header\">\n        <button type=\"button\" (click)=\"changeQuantity(card.name, false)\" class=\"btn btn-danger pull-left\">\n          <i class=\"fa fa-minus\" aria-hidden=\"true\"></i>\n        </button>\n        <!--<div class=\"center-block\">{{ order[card.name] }}</div>-->\n        <button type=\"button\" (click)=\"changeQuantity(card.name)\" class=\"btn btn-success pull-right\">\n          <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n        </button>\n      </div>\n      <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">\n      <ul class=\"list-group list-group-flush\">\n        <li class=\"list-group-item text-xs-center\">{{ card.name | formatter }}</li>\n        <li class=\"list-group-item text-xs-center\">\n          <span *ngIf=\"isPos(order[card.name])\">+</span>{{ order[card.name] }}\n          &bull;\n          <span [class.buy-price]=\"isPos(order[card.name])\"\n            [class.sell-price]=\"!isPos(order[card.name])\">{{ order[card.name] * card.buyPrice | currency:'USD':true }}</span>\n          <!--<span [class.buy-price]=\"isPos(order[card.name])\"-->\n          <!--  [class.sell-price]=\"!isPos(order[card.name])\">{{ order[card.name] * card.buyPrice }}</span>-->\n        </li>\n        <li class=\"list-group-item text-xs-center\">\n          <span class=\"buy-price\">{{ card.buyPrice | currency:'USD':true }}</span>\n          &bull;\n          <span class=\"sell-price\">{{ card.sellPrice | currency:'USD':true }}</span>\n        </li>\n      </ul>\n      <!--<div class=\"card-block\">-->\n      <!--  <p class=\"card-text text-xs-right\">{{ card.name | formatter }}</p>-->\n      <!--  <p class=\"card-text text-xs-right\">-->\n      <!--    <span class=\"buy-price\">{{ card.buyPrice | currency:'USD':true }}</span>-->\n      <!--    &bull;-->\n      <!--    <span class=\"sell-price\">{{ card.sellPrice | currency:'USD':true }}</span>-->\n      <!--  </p>-->\n      <!--</div>-->\n    </div>\n  </div>\n</div>"
+	module.exports = "<!--<div class=\"card\">-->\n<!--  <div class=\"card-block\">-->\n    <!-- Do +/- -->\n<!--    <h4 class=\"card-title\">Card Title</h4>-->\n<!--  </div>-->\n  <!-- img -->\n<!--  <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">-->\n<!--  <div class=\"card-block\">-->\n    <!-- other stuff -->\n<!--    <p class=\"card-text\">Card text</p>-->\n<!--  </div>-->\n<!--</div>-->\n<!--<div class=\"row\" *ngFor=\"let cardRow of cardRows\">-->\n<!--  <div class=\"col-sm-6\" *ngFor=\"let card of cardRow\">-->\n<!--    <div class=\"card center-block\" style=\"max-width: 318px;\">-->\n<!--      <div class=\"card-block\">-->\n<!--        <h4 class=\"card-title\">{{ card.name }}</h4>-->\n<!--      </div>-->\n<!--      <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">-->\n<!--      <div class=\"card-block\">-->\n<!--        <p class=\"card-text\">{{ card.sellPrice | currency:'USD':true:'1.2-2' }}</p>-->\n<!--      </div>-->\n<!--    </div>-->\n<!--  </div>-->\n<!--</div>-->\n<button type=\"button\" (click)=\"completePurchase()\" class=\"btn btn-primary purchase-btn\">BUY/SELL ITEMS</button>\n\n<div class=\"row\">\n  <div class=\"col-md-6 col-lg-4\" *ngFor=\"let card of cards\">\n    <div class=\"card card-inverse center-block\">\n      <!--<div class=\"card-block\">-->\n      <!--  <h4 class=\"card-title\">{{ card.name | formatter }}</h4>-->\n        <!--<button type=\"button\" class=\"btn btn-success\" style=\"border:0;\">-->\n        <!--  <i class=\"fa fa-plus\" aria-hidden=\"true\" style=\"color: white;\"></i>-->\n        <!--</button>-->\n      <!--</div>-->\n      <!--<div class=\"card-header\" card-header>-->\n      <div class=\"card-header\">\n        <button type=\"button\" (click)=\"changeQuantity(card.name, false)\" class=\"btn btn-danger pull-left inv-minus\">\n          <i class=\"fa fa-minus\" aria-hidden=\"true\"></i>\n        </button>\n        <!--<span [style.width]=\"getStatusWidth(card_header)\"></span>-->\n        <!--<span class=\"inv-status\" #status [style.margin]=\"getMargin(status)\">{{ gameService.inventory[card.name] }}</span>-->\n        <span class=\"inv-status\">{{ inventory[card.name] }}</span>\n        <!--<div class=\"center-block\">{{ order[card.name] }}</div>-->\n        <button type=\"button\" (click)=\"changeQuantity(card.name)\" class=\"btn btn-success pull-right inv-plus\">\n          <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n        </button>\n      </div>\n      <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">\n      <ul class=\"list-group list-group-flush\">\n        <li class=\"list-group-item text-xs-center\">{{ card.name | formatter }}</li>\n        <li class=\"list-group-item text-xs-center\">\n          <span *ngIf=\"isPos(order[card.name])\">+</span>{{ order[card.name] }}\n          &bull;\n          <span [class.buy-price]=\"isPos(order[card.name])\"\n            [class.sell-price]=\"!isPos(order[card.name])\">\n              <span *ngIf=\"order[card.name] > 0\">-</span><span *ngIf=\"order[card.name] < 0\">+</span>{{ order[card.name] * card.buyPrice | currency:'USD':true:'1.2-2' }}\n          </span>\n          <!--<span [class.buy-price]=\"isPos(order[card.name])\"-->\n          <!--  [class.sell-price]=\"!isPos(order[card.name])\">{{ order[card.name] * card.buyPrice }}</span>-->\n        </li>\n        <li class=\"list-group-item text-xs-center\">\n          <span class=\"buy-price\">{{ card.buyPrice | currency:'USD':true:'1.2-2' }}</span>\n          &bull;\n          <span class=\"sell-price\">{{ card.sellPrice | currency:'USD':true:'1.2-2' }}</span>\n        </li>\n      </ul>\n      <!--<div class=\"card-block\">-->\n      <!--  <p class=\"card-text text-xs-right\">{{ card.name | formatter }}</p>-->\n      <!--  <p class=\"card-text text-xs-right\">-->\n      <!--    <span class=\"buy-price\">{{ card.buyPrice | currency:'USD':true:'1.2-2' }}</span>-->\n      <!--    &bull;-->\n      <!--    <span class=\"sell-price\">{{ card.sellPrice | currency:'USD':true:'1.2-2' }}</span>-->\n      <!--  </p>-->\n      <!--</div>-->\n    </div>\n  </div>\n</div>"
 
 /***/ },
 
