@@ -91,7 +91,7 @@ webpackJsonp([2],{
 
 	"use strict";
 	var core_1 = __webpack_require__(1);
-	var angular2_hmr_1 = __webpack_require__(498);
+	var angular2_hmr_1 = __webpack_require__(500);
 	var AppState = (function () {
 	    function AppState() {
 	        // @HmrState() is used by HMR to track the state of any object during HMR (hot module replacement)
@@ -787,9 +787,9 @@ webpackJsonp([2],{
 	            directives: [router_active_1.RouterActive],
 	            encapsulation: core_1.ViewEncapsulation.None,
 	            styles: [
-	                __webpack_require__(474)
+	                __webpack_require__(476)
 	            ],
-	            template: __webpack_require__(475)
+	            template: __webpack_require__(477)
 	        }),
 	        router_deprecated_1.RouteConfig([
 	            { path: '/', name: 'Index', component: purchasing_1.PurchasingComponent, useAsDefault: true },
@@ -828,7 +828,7 @@ webpackJsonp([2],{
 	    AutomationComponent = __decorate([
 	        core_1.Component({
 	            selector: 'automation',
-	            template: __webpack_require__(476)
+	            template: __webpack_require__(478)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], AutomationComponent);
@@ -1014,7 +1014,7 @@ webpackJsonp([2],{
 	    InventoryComponent = __decorate([
 	        core_1.Component({
 	            selector: 'inventory',
-	            template: __webpack_require__(477)
+	            template: __webpack_require__(479)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], InventoryComponent);
@@ -1050,7 +1050,7 @@ webpackJsonp([2],{
 	    ManufacturingComponent = __decorate([
 	        core_1.Component({
 	            selector: 'manufacturing',
-	            template: __webpack_require__(478)
+	            template: __webpack_require__(480)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], ManufacturingComponent);
@@ -1139,8 +1139,8 @@ webpackJsonp([2],{
 	    PurchasingComponent = __decorate([
 	        core_1.Component({
 	            selector: 'purchasing',
-	            styles: [__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./purchasing.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))],
-	            template: __webpack_require__(479),
+	            styles: [__webpack_require__(475)],
+	            template: __webpack_require__(481),
 	            pipes: [app_service_1.FormatterPipe]
 	        }), 
 	        __metadata('design:paramtypes', [(typeof (_a = typeof game_1.GameService !== 'undefined' && game_1.GameService) === 'function' && _a) || Object])
@@ -1282,31 +1282,24 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 474:
-/***/ function(module, exports) {
-
-	module.exports = "html, body{\n  height: 100%;\n  font-family: Arial, Helvetica, sans-serif\n}\n\nspan.active {\n  background-color: gray;\n}\n\n.container-fluid {\n  padding-top: 100px;\n}"
-
-/***/ },
-
 /***/ 475:
 /***/ function(module, exports) {
 
-	module.exports = "<nav class=\"navbar navbar-fixed-top navbar-dark bg-inverse\">\n  <a class=\"navbar-brand\" href=\"/\">{{ name }}</a>\n  <ul class=\"nav navbar-nav pull-md-right\">\n    <li class=\"nav-item\">{{ money | currency:'USD':true }}</li>\n    <li *ngFor=\"let navLink of navLinks\" router-active=\"active\" class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"[navLink.comp]\">{{ navLink.text }}</a>\n    </li>\n  </ul>\n</nav>\n<div [class.container]=\"!fluid\" [class.container-fluid]=\"fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-8\">\n      <router-outlet></router-outlet>\n    </div>\n    <div class=\"col-md-12 col-lg-4\">\n      <div class=\"card center-block\">\n        <div class=\"card-header\">\n          <h4 class=\"card-title\">Sales</h4>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+	module.exports = ".card.center-block {\n  max-width: 318px; }\n  .card.center-block.card-inverse {\n    background-color: #595959;\n    border-color: #595959; }\n  .card.center-block .card-header {\n    padding: 0px; }\n    .card.center-block .card-header button.btn {\n      border-radius: 0; }\n      .card.center-block .card-header button.btn i.fa {\n        color: white; }\n\n.buy-price {\n  color: red; }\n\n.sell-price {\n  color: #00B300; }\n\n.btn.purchase-btn {\n  position: fixed;\n  top: 54px;\n  right: 0px;\n  width: 100%;\n  z-index: 1029;\n  border-radius: 0; }\n\n.row.root-row {\n  padding-top: 40px; }\n"
 
 /***/ },
 
 /***/ 476:
 /***/ function(module, exports) {
 
-	module.exports = ""
+	module.exports = "html, body{\n  height: 100%;\n  font-family: Arial, Helvetica, sans-serif\n}\n\nspan.active {\n  background-color: gray;\n}\n\n.container-fluid {\n  padding-top: 100px;\n}"
 
 /***/ },
 
 /***/ 477:
 /***/ function(module, exports) {
 
-	module.exports = ""
+	module.exports = "<nav class=\"navbar navbar-fixed-top navbar-dark bg-inverse\">\n  <a class=\"navbar-brand\" href=\"/\">{{ name }}</a>\n  <ul class=\"nav navbar-nav pull-md-right\">\n    <li class=\"nav-item\">{{ money | currency:'USD':true }}</li>\n    <li *ngFor=\"let navLink of navLinks\" router-active=\"active\" class=\"nav-item\">\n      <a class=\"nav-link\" [routerLink]=\"[navLink.comp]\">{{ navLink.text }}</a>\n    </li>\n  </ul>\n</nav>\n<div [class.container]=\"!fluid\" [class.container-fluid]=\"fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-8\">\n      <router-outlet></router-outlet>\n    </div>\n    <div class=\"col-md-12 col-lg-4\">\n      <div class=\"card center-block\">\n        <div class=\"card-header\">\n          <h4 class=\"card-title\">Sales</h4>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ },
 
@@ -1320,11 +1313,25 @@ webpackJsonp([2],{
 /***/ 479:
 /***/ function(module, exports) {
 
+	module.exports = ""
+
+/***/ },
+
+/***/ 480:
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+
+/***/ 481:
+/***/ function(module, exports) {
+
 	module.exports = "<!--<div class=\"card\">-->\n<!--  <div class=\"card-block\">-->\n    <!-- Do +/- -->\n<!--    <h4 class=\"card-title\">Card Title</h4>-->\n<!--  </div>-->\n  <!-- img -->\n<!--  <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">-->\n<!--  <div class=\"card-block\">-->\n    <!-- other stuff -->\n<!--    <p class=\"card-text\">Card text</p>-->\n<!--  </div>-->\n<!--</div>-->\n<!--<div class=\"row\" *ngFor=\"let cardRow of cardRows\">-->\n<!--  <div class=\"col-sm-6\" *ngFor=\"let card of cardRow\">-->\n<!--    <div class=\"card center-block\" style=\"max-width: 318px;\">-->\n<!--      <div class=\"card-block\">-->\n<!--        <h4 class=\"card-title\">{{ card.name }}</h4>-->\n<!--      </div>-->\n<!--      <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">-->\n<!--      <div class=\"card-block\">-->\n<!--        <p class=\"card-text\">{{ card.sellPrice | currency:'USD':true }}</p>-->\n<!--      </div>-->\n<!--    </div>-->\n<!--  </div>-->\n<!--</div>-->\n<button type=\"button\" (click)=\"completePurchase()\" class=\"btn btn-primary purchase-btn\">BUY/SELL ITEMS</button>\n\n<div class=\"row\">\n  <div class=\"col-md-6 col-lg-4\" *ngFor=\"let card of cards\">\n    <div class=\"card card-inverse center-block\">\n      <!--<div class=\"card-block\">-->\n      <!--  <h4 class=\"card-title\">{{ card.name | formatter }}</h4>-->\n        <!--<button type=\"button\" class=\"btn btn-success\" style=\"border:0;\">-->\n        <!--  <i class=\"fa fa-plus\" aria-hidden=\"true\" style=\"color: white;\"></i>-->\n        <!--</button>-->\n      <!--</div>-->\n      <div class=\"card-header\">\n        <button type=\"button\" (click)=\"changeQuantity(card.name, false)\" class=\"btn btn-danger pull-left\">\n          <i class=\"fa fa-minus\" aria-hidden=\"true\"></i>\n        </button>\n        <!--<div class=\"center-block\">{{ order[card.name] }}</div>-->\n        <button type=\"button\" (click)=\"changeQuantity(card.name)\" class=\"btn btn-success pull-right\">\n          <i class=\"fa fa-plus\" aria-hidden=\"true\"></i>\n        </button>\n      </div>\n      <img src=\"http://placehold.it/318x180\" alt=\"Placeholder\">\n      <ul class=\"list-group list-group-flush\">\n        <li class=\"list-group-item text-xs-center\">{{ card.name | formatter }}</li>\n        <li class=\"list-group-item text-xs-center\">\n          <span *ngIf=\"isPos(order[card.name])\">+</span>{{ order[card.name] }}\n          &bull;\n          <span [class.buy-price]=\"isPos(order[card.name])\"\n            [class.sell-price]=\"!isPos(order[card.name])\">{{ order[card.name] * card.buyPrice | currency:'USD':true }}</span>\n          <!--<span [class.buy-price]=\"isPos(order[card.name])\"-->\n          <!--  [class.sell-price]=\"!isPos(order[card.name])\">{{ order[card.name] * card.buyPrice }}</span>-->\n        </li>\n        <li class=\"list-group-item text-xs-center\">\n          <span class=\"buy-price\">{{ card.buyPrice | currency:'USD':true }}</span>\n          &bull;\n          <span class=\"sell-price\">{{ card.sellPrice | currency:'USD':true }}</span>\n        </li>\n      </ul>\n      <!--<div class=\"card-block\">-->\n      <!--  <p class=\"card-text text-xs-right\">{{ card.name | formatter }}</p>-->\n      <!--  <p class=\"card-text text-xs-right\">-->\n      <!--    <span class=\"buy-price\">{{ card.buyPrice | currency:'USD':true }}</span>-->\n      <!--    &bull;-->\n      <!--    <span class=\"sell-price\">{{ card.sellPrice | currency:'USD':true }}</span>-->\n      <!--  </p>-->\n      <!--</div>-->\n    </div>\n  </div>\n</div>"
 
 /***/ },
 
-/***/ 497:
+/***/ 499:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -1382,7 +1389,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 498:
+/***/ 500:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1390,8 +1397,8 @@ webpackJsonp([2],{
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
 	var hmr_store_1 = __webpack_require__(130);
+	__export(__webpack_require__(501));
 	__export(__webpack_require__(499));
-	__export(__webpack_require__(497));
 	__export(__webpack_require__(130));
 	function provideHmrState(initialState) {
 	    if (initialState === void 0) { initialState = {}; }
@@ -1405,7 +1412,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 499:
+/***/ 501:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
