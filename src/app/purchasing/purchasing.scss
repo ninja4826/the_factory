@@ -1,15 +1,17 @@
 .card.center-block {
   max-width: 318px;
-  
   &.card-inverse {
     background-color: #595959;
     border-color: #595959;
   }
-  
   & .card-header {
     padding: 0px;
+    background-color: #595959;
+    height: 38px;
+    // vertical-align: middle;
     & button.btn {
       border-radius: 0;
+      // height: 100%;
       & i.fa {
         color: white;
       }
@@ -35,4 +37,16 @@
 
 .row.root-row {
   padding-top: 40px;
+}
+
+.inv-status {
+  // display: block;
+  width: 222.8437px;
+  // height: 38px;
+  display: inline-block;
+  background-color: #595959;
+  color: white;
+  text-align: center;
+  // margin: auto;
+  margin: 7px 0px 7px 0px;
 }

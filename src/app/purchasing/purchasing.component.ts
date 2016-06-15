@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService, MATERIALS, IMaterial } from '../game';
 import { FormatterPipe } from '../app.service';
-// import { items } from '../game';
 
 @Component({
   selector: 'purchasing',
@@ -19,6 +18,10 @@ export class PurchasingComponent implements OnInit {
   order: { [name: string]: number } = {};
   orderPrice: number = 0;
   
+  inventory: { [name: string]: number } = {};
+  
+  headerMargins: string = '';
+  
   constructor(gameService: GameService) {
   // constructor() {
     this.gameService = gameService;
@@ -33,18 +36,25 @@ export class PurchasingComponent implements OnInit {
       this.order[name] = 0;
     }
     
-    console.log(MATERIALS);
+    // console.log(MATERIALS);
+    this.inventory = this.gameService.inventory;
   }
   
   changeQuantity(name: string, pos: boolean = true) {
+    console.log(this.order[name]);
+    console.log(this.gameService.inventory[name]);
     if (pos) {
       if ((this.orderPrice + this.cardObj[name].buyPrice) > this.gameService.money) {
         return;
       }
     } else {
-      if (this.gameService.inventory[name] === 0) {
+      // if (this.gameService.inventory[name] === 0) {
+      //   return;
+      // }
+      if (this.order[name] <= (this.gameService.inventory[name]) * -1) {
         return;
       }
+        
     }
     let add = (pos ? 1 : -1);
     this.order[name] += add;

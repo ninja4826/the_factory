@@ -2,7 +2,7 @@ const helpers = require('../helpers');
 const execSync = require('child_process').execSync;
 
 // const REPO_NAME_RE = /Push  URL: https:\/\/github\.com\/.*\/(.*)\.git/;
-const REPO_NAME_RE = /Push URL: (?:https:\/\/|git@)github\.com(?:\/|:).*\/(.*)\.git/;
+const REPO_NAME_RE = /Push  URL: (?:https:\/\/|git@)github\.com(?:\/|:).*\/(.*)\.git/;
 
 function getWebpackConfigModule() {
   if (helpers.hasProcessFlag('github-dev')) {
@@ -19,7 +19,7 @@ function getRepoName(remoteName) {
 
   var stdout = execSync('git remote show ' + remoteName),
       match = REPO_NAME_RE.exec(stdout);
-
+  console.log(match);
   if (!match) {
     throw new Error('Could not find a repository on remote ' + remoteName);
   } else {
