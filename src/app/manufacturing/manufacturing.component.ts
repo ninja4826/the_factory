@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemCardComponent } from '../item_card';
-import { GameService, ALL_TIERS } from '../game';
+import { GameService, Retail, ALL_TIERS } from '../game';
 
 @Component({
   selector: 'manufacturing',
