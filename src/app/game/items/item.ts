@@ -2,6 +2,7 @@ export interface Item {
   name: string;
   // img_url: string;
   sellPrice: number;
+  isMaterial: boolean;
 }
 
 export interface IRequirement {

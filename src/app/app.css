@@ -10,3 +10,10 @@ span.active {
 .container-fluid {
   padding-top: 100px;
 }
+
+.buy-price {
+  color: red;
+}
+.sell-price {
+  color: #00B300;
+}

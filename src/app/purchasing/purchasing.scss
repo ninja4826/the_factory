@@ -1,38 +1,26 @@
-.card.center-block {
-  max-width: 318px;
-  &.card-inverse {
-    background-color: #595959;
-    border-color: #595959;
+button.btn {
+  border-radius: 0;
+  &.inv-minus {
+    border-top-left-radius: 4px;
   }
-  & .card-header {
-    padding: 0px;
-    background-color: #595959;
-    height: 38px;
-    // vertical-align: middle;
-    & button.btn {
-      border-radius: 0;
-      // height: 100%;
-      & i.fa {
-        color: white;
-      }
-    }
+  &.inv-plus {
+    border-top-right-radius: 4px;
+  }
+  & i.fa {
+    color: white;
   }
 }
 
-.buy-price {
-  color: red;
-}
-.sell-price {
-  color: #00B300;
-}
-
-.btn.purchase-btn {
+.btn.btn-purchase {
   position: fixed;
   top: 54px;
   right: 0px;
   width: 100%;
   z-index: 1029;
   border-radius: 0;
+  
+  color: white;
+  background-color: #595959;
 }
 
 .row.root-row {
@@ -41,7 +29,7 @@
 
 .inv-status {
   // display: block;
-  width: 222.8437px;
+  width: 224.8437px;
   // height: 38px;
   display: inline-block;
   background-color: #595959;

@@ -1,0 +1,18 @@
+<div class="card card-inverse center-block">
+  <!--<div class="card-header">-->
+  <!--  <ng-content select="item-card-header"></ng-content>-->
+  <!--</div>-->
+  <div class="card-header">
+    <ng-content></ng-content>
+  </div>
+  <img [src]="imgSrc" [alt]="item.name" (click)="click()">
+  <ul class="list-group list-group-flush">
+    <!--<li class="list-group-item text-xs-center">{{ item.name | formatter }}</li>-->
+    <li class="list-group-item text-xs-center">{{ item.name | formatter }}</li>
+    <li class="list-group-item text-xs-center">
+      <span *ngIf="isMaterial" class="buy-price">{{ material.buyPrice | currency:'USD':true:'1.2-2' }}</span>
+      <span *ngIf="isMaterial">&bull;</span>
+      <span class="sell-price">{{ item.sellPrice | currency:'USD':true:'1.2-2' }}</span>
+    </li>
+  </ul>
+</div>

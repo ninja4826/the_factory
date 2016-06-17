@@ -1,0 +1,5 @@
+<div class="row">
+  <div class="col-md-6 col-lg-4" *ngFor="let card of retails">
+    <item-card [item]="card" img-src="http://placehold.it/318x180" (onClick)="build(card.name)"></item-card>
+  </div>
+</div>

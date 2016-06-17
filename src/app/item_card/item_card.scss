@@ -1,0 +1,12 @@
+.card {
+  max-width: 320px;
+  &.card-inverse {
+    background-color: #595959;
+    border-color: #595959;
+  }
+  & .card-header {
+    padding: 0px;
+    background-color: #595959;
+    height: 38px;
+  }
+}

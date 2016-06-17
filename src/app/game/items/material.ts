@@ -4,6 +4,23 @@ export interface IMaterial extends Item {
   buyPrice: number;
 }
 
+export class Material implements IMaterial {
+  name: string;
+  sellPrice: number;
+  
+  buyPrice: number;
+  
+  constructor(mat: IMaterial) {
+    this.name = mat.name;
+    this.sellPrice = mat.sellPrice;
+    this.buyPrice = mat.buyPrice;
+  }
+  
+  get isMaterial(): boolean {
+    return true;
+  }
+}
+
 // export const MATERIALS: IMaterial[] = [
 var materials: IMaterial[] = [
   { name: "cardboard", sellPrice: 0.18, buyPrice: 0.24 },
@@ -17,9 +34,11 @@ var materials: IMaterial[] = [
   { name: "wire", sellPrice: 1.28, buyPrice: 1.71 }
 ];
 
-let obj: { [name: string]: IMaterial } = {};
+let obj: { [name: string]: Material } = {};
 
-export const MATERIALS: { [name: string]: IMaterial } = materials.reduce((prev, curr) => {
+export const MATERIALS: { [name: string]: Material } = materials.map((mat) => {
+  return new Material(mat);
+}).reduce((prev, curr) => {
   prev[curr.name] = curr;
   return prev;
 }, obj);

@@ -1,22 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService, MATERIALS, IMaterial } from '../game';
+import { GameService, MATERIALS, Material } from '../game';
+import { ItemCardComponent } from '../item_card';
 import { FormatterPipe } from '../app.service';
+
+interface OrderList {
+  buy: { [name: string]: number };
+  sell: { [name: string]: number };
+}
 
 @Component({
   selector: 'purchasing',
   styles: [ require('./purchasing.scss') ],
   template: require('./purchasing.html'),
+  directives: [ ItemCardComponent ],
   pipes: [ FormatterPipe ]
 })
 export class PurchasingComponent implements OnInit {
   
   gameService: GameService;
   
-  cards: IMaterial[] = [];
-  cardObj: { [name: string]: IMaterial };
+  cards: Material[] = [];
+  cardObj: { [name: string]: Material };
   
   order: { [name: string]: number } = {};
+  orderList: OrderList = { buy: {}, sell: {} };
+  
   orderPrice: number = 0;
+  buyPrice: number = 0;
+  sellPrice: number = 0;
   
   inventory: { [name: string]: number } = {};
   
@@ -34,6 +45,8 @@ export class PurchasingComponent implements OnInit {
     for (let name in this.cardObj) {
       this.cards.push(this.cardObj[name]);
       this.order[name] = 0;
+      this.orderList.buy[name] = 0;
+      this.orderList.sell[name] = 0;
     }
     
     // console.log(MATERIALS);
@@ -58,7 +71,34 @@ export class PurchasingComponent implements OnInit {
     }
     let add = (pos ? 1 : -1);
     this.order[name] += add;
-    this.orderPrice += (this.cardObj[name].buyPrice * add);
+    // this.orderList[pos ? 'buy' : 'sell'][name]++;
+    // console.log(this.orderList);
+    let buyKey = pos ? 'buy' : 'sell';
+    let sellKey = pos ? 'sell' : 'buy';
+    if (this.orderList[sellKey][name] !== 0) {
+      this.orderList[sellKey][name]--;
+    } else {
+      this.orderList[buyKey][name]++;
+    }
+    this.updatePrices();
+    // this.orderPrice += (this.cardObj[name].buyPrice * add);
+  }
+  
+  private updatePrices() {
+    console.log(this.orderList);
+    let buyPrice = 0;
+    let sellPrice = 0;
+    
+    for (let name in this.cardObj) {
+      buyPrice += (this.orderList.buy[name] * this.cardObj[name].buyPrice);
+      sellPrice += (this.orderList.sell[name] * this.cardObj[name].sellPrice);
+    }
+    console.log('sell:', sellPrice);
+    console.log('buy:', buyPrice);
+    
+    this.buyPrice = buyPrice;
+    this.sellPrice = sellPrice;
+    this.orderPrice = sellPrice - buyPrice;
   }
   
   isPos(val: number): boolean {
@@ -74,8 +114,14 @@ export class PurchasingComponent implements OnInit {
       let count = this.order[name];
       if (this.gameService.add(name, count, true)) {
         this.order[name] = 0;
+        this.orderList.buy[name] = 0;
+        this.orderList.sell[name] = 0;
+        // this.orderPrice = 0;
+        // this.buyPrice = 0;
+        // this.sellPrice = 0;
       }
     }
+    this.updatePrices();
     // this.gameService.money -= this.orderPrice;
   }
   

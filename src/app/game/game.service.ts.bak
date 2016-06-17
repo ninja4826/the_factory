@@ -3,14 +3,21 @@ import { Injectable, EventEmitter } from '@angular/core';
 // import * as items from './items';
 import { MATERIALS, ALL_TIERS } from './items';
 
+interface SaveObject {
+  money: number;
+  inventory: { [name: string]: number };
+  sales: { name: string, count: number };
+}
+
 @Injectable()
 export class GameService {
   
   moneyEmitter: EventEmitter<number> = new EventEmitter();
   inventoryEmitter: EventEmitter<{ [name: string]: number }> = new EventEmitter();
   salesEmitter: EventEmitter<{ name: string, count: number }> = new EventEmitter();
-  money: number = 1000;
-  inventory: { [name: string]: number } = {};
+  _money: number = 1000;
+  _inventory: { [name: string]: number } = {};
+  sales: { name: string, count: number };
   
   constructor() {
     // console.log('material:\n', material, '\n');
@@ -23,8 +30,26 @@ export class GameService {
       this.inventory[name] = 0;
     }
     
+    this.loadGame();
+    
     this.moneyEmitter.emit(this.money);
     this.inventoryEmitter.emit(this.inventory);
+    
+    let saveFunc = () => {
+      this.saveGame();
+    };
+    this.moneyEmitter.subscribe(saveFunc);
+    this.inventoryEmitter.subscribe(saveFunc);
+    this.salesEmitter.subscribe(saveFunc);
+  }
+  
+  loadGame() {
+    let obj: SaveObject = JSON.parse(window.localStorage.getItem('factory_save'));
+    this.money = 
+  }
+  
+  saveGame() {
+    
   }
   
   add(name: string, count: number, buy: boolean = false): boolean {
@@ -58,11 +83,28 @@ export class GameService {
       this.money -= (price * count);
       this.moneyEmitter.emit(this.money);
     }
-    
-    
-    
     this.inventory[name] += count;
     this.inventoryEmitter.emit(this.inventory);
     return true;
+  }
+  
+  get money(): number {
+    return this._money;
+  }
+  set money(val: number) {
+    this._money = val;
+    this.emit('money');
+  }
+  
+  get inventory(): { [name: string]: number } {
+    return this._inventory;
+  }
+  
+  get sales(): { name: string, count: number } {
+    return this._sales;
+  }
+  addSale(name: string, count: number) {
+    this._sales[name] += count;
+    this.emit('sales');
   }
 }

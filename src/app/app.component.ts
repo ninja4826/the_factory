@@ -9,6 +9,7 @@ import { Home } from './home';
 import { RouterActive } from './router-active';
 
 import { GameService } from './game';
+import * as game from './game';
 
 import { AutomationComponent } from './automation';
 import { InventoryComponent } from './inventory';
@@ -60,6 +61,7 @@ export class App {
   constructor(
     appState: AppState,
     gameService: GameService) {
+    console.log('app constructor');
     this.appState = appState;
     this.gameService = gameService;
     
@@ -72,13 +74,32 @@ export class App {
         text: comp
       };
     });
+    // this.gameService.subscribe({
+    //   money: {
+    //     onNext: (data: number) => {
+    //       this.money = data;
+    //     }
+    //   }
+    // });
+    this.navLinks[0] = {
+      comp: 'Index',
+      text: 'Purchasing'
+    };
   }
 
   ngOnInit() {
-    console.log('Initial App State', this.appState.state);
-    this.gameService.moneyEmitter.subscribe((money: number) => {
-      this.money = money;
-      console.log(this.money);
+    // console.log('Initial App State', this.appState.state);
+    console.log('Game exports:', game);
+    // this.gameService.moneyEmitter.subscribe((money: number) => {
+    //   this.money = money;
+    //   console.log(this.money);
+    // });
+    this.gameService.subscribe({
+      money: {
+        onNext: (data: number) => {
+          this.money = data;
+        }
+      }
     });
     this.money = this.gameService.money;
   }

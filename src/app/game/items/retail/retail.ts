@@ -8,6 +8,7 @@ export interface IRetail extends Item {
 export class Retail implements IRetail {
   name: string;
   sellPrice: number;
+  
   tier: number;
   requirements: Requirement[];
   
@@ -17,6 +18,10 @@ export class Retail implements IRetail {
     this.tier = ret.tier || 0;
     // console.log(ret.requirements);
     this.requirements = ret.requirements.map((req) => new Requirement(req));
+  }
+  
+  get isMaterial(): boolean {
+    return false;
   }
 }
 
